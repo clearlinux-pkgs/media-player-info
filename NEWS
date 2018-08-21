@@ -1,3 +1,10 @@
+media-player-info 24 (2018-08-21)
+=================================
+Martin Pitt:
+      Move to new freedesktop GitLab repository, update README.md accordingly
+      Drop non-hwdb mode, require udev 196 now
+      Several build system cleanups and robustifications
+
 media-player-info 23 (2017-09-15)
 =================================
 Bastien Nocera:
