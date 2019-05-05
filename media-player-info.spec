@@ -4,15 +4,15 @@
 #
 Name     : media-player-info
 Version  : 24
-Release  : 2
+Release  : 3
 URL      : https://www.freedesktop.org/software/media-player-info/media-player-info-24.tar.gz
 Source0  : https://www.freedesktop.org/software/media-player-info/media-player-info-24.tar.gz
-Summary  : No detailed summary available
+Summary  : Data files describing media player capabilities, for post-HAL systems
 Group    : Development/Tools
 License  : BSD-3-Clause GPL-2.0
-Requires: media-player-info-config
-Requires: media-player-info-license
-Requires: media-player-info-data
+Requires: media-player-info-config = %{version}-%{release}
+Requires: media-player-info-data = %{version}-%{release}
+Requires: media-player-info-license = %{version}-%{release}
 BuildRequires : pkgconfig(udev)
 
 %description
@@ -50,7 +50,14 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1534889457
+export SOURCE_DATE_EPOCH=1557095569
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %configure --disable-static
 make  %{?_smp_mflags}
 
@@ -62,11 +69,11 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1534889457
+export SOURCE_DATE_EPOCH=1557095569
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/media-player-info
-cp COPYING %{buildroot}/usr/share/doc/media-player-info/COPYING
-cp tools/COPYING %{buildroot}/usr/share/doc/media-player-info/tools_COPYING
+mkdir -p %{buildroot}/usr/share/package-licenses/media-player-info
+cp COPYING %{buildroot}/usr/share/package-licenses/media-player-info/COPYING
+cp tools/COPYING %{buildroot}/usr/share/package-licenses/media-player-info/tools_COPYING
 %make_install
 
 %files
@@ -335,6 +342,6 @@ cp tools/COPYING %{buildroot}/usr/share/doc/media-player-info/tools_COPYING
 /usr/share/media-player-info/trekstor_vibez.mpi
 
 %files license
-%defattr(-,root,root,-)
-/usr/share/doc/media-player-info/COPYING
-/usr/share/doc/media-player-info/tools_COPYING
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/media-player-info/COPYING
+/usr/share/package-licenses/media-player-info/tools_COPYING
