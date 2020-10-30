@@ -4,10 +4,10 @@
 #
 Name     : media-player-info
 Version  : 24
-Release  : 3
+Release  : 4
 URL      : https://www.freedesktop.org/software/media-player-info/media-player-info-24.tar.gz
 Source0  : https://www.freedesktop.org/software/media-player-info/media-player-info-24.tar.gz
-Summary  : Data files describing media player capabilities, for post-HAL systems
+Summary  : No detailed summary available
 Group    : Development/Tools
 License  : BSD-3-Clause GPL-2.0
 Requires: media-player-info-config = %{version}-%{release}
@@ -44,36 +44,38 @@ license components for the media-player-info package.
 
 %prep
 %setup -q -n media-player-info-24
+cd %{_builddir}/media-player-info-24
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1557095569
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1604099118
+export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
 export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %configure --disable-static
 make  %{?_smp_mflags}
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-make VERBOSE=1 V=1 %{?_smp_mflags} check
+make %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1557095569
+export SOURCE_DATE_EPOCH=1604099118
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/media-player-info
-cp COPYING %{buildroot}/usr/share/package-licenses/media-player-info/COPYING
-cp tools/COPYING %{buildroot}/usr/share/package-licenses/media-player-info/tools_COPYING
+cp %{_builddir}/media-player-info-24/COPYING %{buildroot}/usr/share/package-licenses/media-player-info/0076bf26a7e2136bc181efa09578d5108e1ac15d
+cp %{_builddir}/media-player-info-24/tools/COPYING %{buildroot}/usr/share/package-licenses/media-player-info/b47456e2c1f38c40346ff00db976a2badf36b5e3
 %make_install
 
 %files
@@ -343,5 +345,5 @@ cp tools/COPYING %{buildroot}/usr/share/package-licenses/media-player-info/tools
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/media-player-info/COPYING
-/usr/share/package-licenses/media-player-info/tools_COPYING
+/usr/share/package-licenses/media-player-info/0076bf26a7e2136bc181efa09578d5108e1ac15d
+/usr/share/package-licenses/media-player-info/b47456e2c1f38c40346ff00db976a2badf36b5e3
