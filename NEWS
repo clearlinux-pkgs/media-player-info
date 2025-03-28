@@ -1,3 +1,20 @@
+media-player-info 26 (2024-08-03)
+=================================
+Martin Pitt (3):
+      Makefile: Factorize file names
+      Fix AppStream metainfo file
+      Validate generated AppStream metainfo file
+
+media-player-info 25 (2024-07-28)
+=================================
+Martin Pitt (3):
+      udev-syntax-check.py: Fix invalid escape sequences
+      tools: Automatic ruff fixes
+      Generate AppStream metainfo file (Debian #1076991)
+
+Petter Reinholdtsen (1):
+      Fix incorrect USB DeviceMatch= (Debian #1076990)
+
 media-player-info 24 (2018-08-21)
 =================================
 Martin Pitt:
